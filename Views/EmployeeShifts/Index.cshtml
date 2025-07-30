@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CafeManagement.Models.EmployeeShift>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="color: #5c4033;">Employee Shifts</h1>
+
+<p>
+    <a asp-action="Create" class="btn-modern">+ Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShiftDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShiftTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShiftDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShiftTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserId)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.ShiftId" class="btn-modern btn-modern-light" style="margin-right: 5px;">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ShiftId" class="btn-modern" style="margin-right: 5px;">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ShiftId" class="btn-modern btn-modern-danger">Delete</a>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@model CafeManagement.Models.EmployeeShift
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit";
+}
+
+<h1 style="color: #5c4033;">Edit</h1>
+
+<h4 style="color: #5c4033;">EmployeeShift</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ShiftId" />
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShiftDate" class="control-label"></label>
+                <input asp-for="ShiftDate" class="form-control" />
+                <span asp-validation-for="ShiftDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShiftTime" class="control-label"></label>
+                <input asp-for="ShiftTime" class="form-control" />
+                <span asp-validation-for="ShiftTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Task" class="control-label"></label>
+                <input asp-for="Task" class="form-control" />
+                <span asp-validation-for="Task" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="💾 Save" class="btn-modern btn-modern-danger" />
+                <a asp-action="Index" class="btn-modern btn-modern-light ms-2">← Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

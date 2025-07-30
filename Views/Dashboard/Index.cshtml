@@ -1,0 +1,77 @@
+﻿@model CafeManagement.Models.DashboardViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Dashboard";
+
+}
+
+<h2 class="mb-4" style="color: #5c4033;">Cafe Dashboard</h2>
+
+<div class="row">
+
+    <!-- Total Orders -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Total Orders Today</h5>
+                <p class="card-text display-6">@Model.TotalOrders</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Total Revenue Today</h5>
+                <p class="card-text display-6">Rs @Model.TotalRevenue.ToString("0.00")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Orders -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Pending Orders</h5>
+                <p class="card-text display-6">@Model.PendingOrders</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <!-- Reservations -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Today’s Reservations</h5>
+                <p class="card-text display-6">@Model.TodayReservations</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Low Stock Items -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Low Stock Items</h5>
+                <p class="card-text display-6">@Model.LowStockItems</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Average Rating -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-coffee">
+            <div class="card-body">
+                <h5 class="card-title">Avg. Feedback Rating</h5>
+                <p class="card-text display-6">@Model.AverageRating.ToString("0.0") ⭐</p>
+            </div>
+        </div>
+    </div>
+
+</div>

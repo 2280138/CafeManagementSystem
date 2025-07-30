@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BrewMaster</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CafeManagement.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    @{
+        var username = Context.Session.GetString("Username");
+        var role = Context.Session.GetString("Role");
+    }
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-brown border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/brewmaster-logo.png" alt="BrewMaster Logo" style="height: 40px;" class="me-2" />
+                </a>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    @if (username != null)
+                    {
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            </li>
+
+                            @if (role == "Admin" || role == "Manager" || role == "Waiter")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Orders" asp-action="Index">Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="MenuItems" asp-action="Index">Menu</a>
+                                </li>
+                            }
+
+                            @* 🎯 Admin-only dropdown *@
+                            @if (role == "Admin")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" id="adminMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-controller="Users" asp-action="Index">Users</a></li>
+                                        <li><a class="dropdown-item" asp-controller="OrderItems" asp-action="Index">Order Items</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index">Reservations</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Inventories" asp-action="Index">Inventory</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Suppliers" asp-action="Index">Suppliers</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Billings" asp-action="Index">Billing</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Discounts" asp-action="Index">Discounts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Kots" asp-action="Index">Kitchen Tickets</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Feedbacks" asp-action="Index">Feedback</a></li>
+                                        <li><a class="dropdown-item" asp-controller="LoyaltyPrograms" asp-action="Index">Loyalty</a></li>
+                                        <li><a class="dropdown-item" asp-controller="EmployeeShifts" asp-action="Index">Shifts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Expenses" asp-action="Index">Expenses</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Recipes" asp-action="Index">Recipes</a></li>
+                                        <li><a class="dropdown-item" asp-controller="WaitTimes" asp-action="Index">Wait Times</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                            @* 🟤 Manager-only dropdown *@
+                            @if (role == "Manager")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" id="managerMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-controller="OrderItems" asp-action="Index">Order Items</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index">Reservations</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Inventories" asp-action="Index">Inventory</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Suppliers" asp-action="Index">Suppliers</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Billings" asp-action="Index">Billing</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Discounts" asp-action="Index">Discounts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Kots" asp-action="Index">Kitchen Tickets</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Feedbacks" asp-action="Index">Feedback</a></li>
+                                        <li><a class="dropdown-item" asp-controller="LoyaltyPrograms" asp-action="Index">Loyalty</a></li>
+                                        <li><a class="dropdown-item" asp-controller="EmployeeShifts" asp-action="Index">Shifts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Expenses" asp-action="Index">Expenses</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Recipes" asp-action="Index">Recipes</a></li>
+                                        <li><a class="dropdown-item" asp-controller="WaitTimes" asp-action="Index">Wait Times</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                            @* 🟤 Waiter-only dropdown *@
+                            @if (role == "Waiter")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" id="waiterMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-controller="OrderItems" asp-action="Index">Order Items</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reservations" asp-action="Index">Reservations</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Billings" asp-action="Index">Billing</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Discounts" asp-action="Index">Discounts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Kots" asp-action="Index">Kitchen Tickets</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Feedbacks" asp-action="Index">Feedback</a></li>
+                                        <li><a class="dropdown-item" asp-controller="LoyaltyPrograms" asp-action="Index">Loyalty</a></li>
+                                        <li><a class="dropdown-item" asp-controller="EmployeeShifts" asp-action="Index">Shifts</a></li>
+                                        <li><a class="dropdown-item" asp-controller="WaitTimes" asp-action="Index">Wait Times</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+
+                        <!-- RIGHT side -->
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <span class="nav-link text-white">Welcome, @username!</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Account" asp-action="Signup">Register</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+
+            </div>
+        </nav>
+
+    </header>
+    <main role="main" class="pb-3 flex-grow-1">
+        <div class="bg-overlay">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!--
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - BrewMaster Management System -
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    -->
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

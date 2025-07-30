@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message</div>
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="card p-4 shadow" style="width: 400px; background-color: rgba(255,255,255,0.95);">
+        <h2 class="text-center my-4">Login</h2>
+            <form method="post">
+                <div class="form-group mb-2">
+                    <label>Username</label>
+                    <input name="username" class="form-control" required />
+                </div>
+                <div class="form-group mb-2">
+                    <label>Password</label>
+                    <input name="password" type="password" class="form-control" required />
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-sm" style="background-color: #5c4033; color: #f5f2e7;">Login</button>
+                    <a href="/Account/Signup" class="btn btn-link" style="color: #5c4033;">Signup</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+

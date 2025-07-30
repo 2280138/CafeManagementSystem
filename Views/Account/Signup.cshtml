@@ -1,0 +1,39 @@
+﻿@model CafeManagement.Models.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Signup";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="card p-4 shadow" style="width: 400px; background-color: rgba(255,255,255,0.95);">
+        <h2 class="text-center my-4">Create Account</h2>
+        <form asp-action="Signup" method="post">
+            <div class="form-group mb-2">
+                <label>Username</label>
+                <input asp-for="Username" class="form-control" required />
+            </div>
+            <div class="form-group mb-2">
+                <label>Password</label>
+                <input asp-for="Password" class="form-control" required type="password" />
+            </div>
+            <div class="form-group mb-2">
+                <label>Role</label>
+                <select asp-for="Role" class="form-control">
+                    <option>Admin</option>
+                    <option>Manager</option>
+                    <option>Waiter</option>
+                </select>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-sm" style="background-color: #5c4033; color: #f5f2e7;">Signup</button>
+                <a href="/Account/Login" class="btn btn-link" style="color: #5c4033;">Back to Login</a>
+            </div>
+            </form>
+    </div>
+</div>
